@@ -24,6 +24,7 @@ OVERWRITE_EXISTING=false
 ENABLE_ALL=false
 INSTALLED_EXT_COUNT=''
 INSTALLED_EXTs=''
+ACTIVATION_MODE=""
 
 # message colors.
 info_text_blue=$(tput setaf 7)
@@ -116,6 +117,7 @@ function get_installed_extensions_list() {
 }
 
 function install_shell_extensions() {
+    installed_ext_uuids=()
 
     for ext_id in "${EXTENSIONS_TO_INSTALL[@]}"; do
 
@@ -144,6 +146,8 @@ function install_shell_extensions() {
         printf "\nHomepage: https://extensions.gnome.org$ext_homepage"
         printf "\nUUID: \"$ext_uuid\""
 
+        target_installation_dir="/home/$USER/.local/share/gnome-shell/extensions/$ext_uuid"
+
         if [ -d "$target_installation_dir" ] && [ "$OVERWRITE_EXISTING" = "false" ]; then
             confirm_action "${normal_text}This extension is already installed. Do you want to overwrite it? (y/n): " || continue
         fi
@@ -153,17 +157,49 @@ function install_shell_extensions() {
         wget -q "$download_url"
         install_extension "$filename"
         rm "$filename"
-
-        if [ ! "$ENABLE_ALL" = "false" ]; then
-
-            restart_gnome_shell
-
-            enable_extension "$ext_uuid"
-        fi
+        
+        # Speichere die UUID für spätere Aktivierung
+        installed_ext_uuids+=("$ext_uuid")
 
         printf "${info_text_blue}Done!\n${normal_text}"
     done
+    
+    # Speichere die installierten UUIDs in eine Datei für spätere Nutzung
+    if [ ${#installed_ext_uuids[@]} -gt 0 ]; then
+        printf "%s\n" "${installed_ext_uuids[@]}" > "/tmp/installed_extensions.txt"
+    fi
+    
     printf "\n"
+}
+
+# Funktion zum Aktivieren aller installierten Extensions
+function enable_all_extensions() {
+    printf "\n${info_text_blue}Activating all installed extensions...${normal_text}\n"
+    
+    # Entweder aus der temporären Datei laden oder alle vorhandenen Extensions verwenden
+    if [ -f "/tmp/installed_extensions.txt" ]; then
+        ext_list=()
+        while IFS= read -r line; do
+            ext_list+=("$line")
+        done < "/tmp/installed_extensions.txt"
+    else
+        get_installed_extensions_list
+        ext_list=($INSTALLED_EXTs)
+    fi
+    
+    if [ ${#ext_list[@]} -eq 0 ]; then
+        printf "${error_text}No extensions found to activate.${normal_text}\n"
+        return
+    fi
+    
+    printf "${status_text_yellow}Found ${#ext_list[@]} extensions to activate.${normal_text}\n"
+    
+    for ext_uuid in "${ext_list[@]}"; do
+        printf "${info_text_blue}Activating: $ext_uuid${normal_text}\n"
+        enable_extension "$ext_uuid"
+    done
+    
+    printf "${status_text_yellow}All extensions have been activated.${normal_text}\n"
 }
 
 # Check if arg is number.
@@ -186,6 +222,7 @@ Options:
     -l. --list          Lists the UUIDs of installed extensions.
     -f, --file          Specify a file containing extension links to install.
     -h, --help          Display this help message.
+    -a, --activate      Only activate already installed extensions (no installation).
 
 Example usages:
 ---------------
@@ -196,7 +233,11 @@ Example usages:
 
 2) ./install-gnome-extensions.sh -e --file links.txt
 
-    Installs and enables the extensions from the URLs specified in "links.txt" file.
+    Installs and enables the extensions from the URLs specified in \"links.txt\" file.
+    
+3) ./install-gnome-extensions.sh --activate
+
+    Activates all installed extensions without installing any new ones.
 
 "
 }
@@ -240,36 +281,65 @@ function install_exts_from_links_file() {
 }
 
 function begin_install() {
-
     exts_list="$(printf '%s, ' "${EXTENSIONS_TO_INSTALL[@]}")"
     exts_list=${exts_list%, }
 
     print_banner
     printf "\n${info_text_blue}[Info] Detected GNOME Shell version: $GNOME_SHELL_VERSION\n\nInstalling $extensions_count extensions ($exts_list)...\n${normal_text}"
     install_shell_extensions
-    printf "\n${normal_text}Complete!\n\n"
-    IsEnvGNOME || printf "${normal_text}Please login to GNOME desktop to see the installed/enabled extensions.\n\n"
-}
-
-function restart_gnome_shell() {
-    printf "${info_text_blue}\nRestarting GNOME Shell to activate extensions...\n${normal_text}"
-
-    if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
-        busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s 'Meta.restart("Restarting GNOME Shell...")'
-        # Kurze Pause für Wayland-Neustart
-        sleep 2
+    
+    printf "\n${status_text_yellow}Extensions were installed but not activated.${normal_text}\n"
+    printf "${info_text_blue}Please log out and log back in, then run this script with --activate to enable them.${normal_text}\n"
+    printf "${info_text_blue}Command: ./install-gnome-extensions.sh --activate${normal_text}\n\n"
+    
+    if confirm_action "Would you like to log out now to complete the installation? (y/n): "; then
+        printf "\n${info_text_blue}Logging out in 5 seconds...${normal_text}\n"
+        sleep 5
+        gnome-session-quit --logout --no-prompt
     else
-        killall -HUP gnome-shell
-        # Kurze Pause für X11-Neustart
-        sleep 1
+        printf "\n${status_text_yellow}Remember to log out and back in before activating extensions.${normal_text}\n\n"
     fi
-
-    printf "${info_text_blue}Shell restart requested. Extensions should be active soon.\n${normal_text}"
 }
 
 # Obtain GNOME Shell version.
 GNOME_SHELL_VERSION="$(gnome-shell --version | cut --delimiter=' ' --fields=3 | cut --delimiter='.' --fields=1,2)"
 
+# Initial mode selection
+if [ "$args_count" -gt 0 ]; then
+    # Prüfe zuerst auf Aktivierungsmodus
+    for arg in "$@"; do
+        if [ "$arg" = "-a" ] || [ "$arg" = "--activate" ]; then
+            ACTIVATION_MODE="activate"
+            break
+        fi
+    done
+else
+    # Wenn keine Argumente übergeben wurden, frage den Benutzer
+    print_banner
+    printf "\n${info_text_blue}What would you like to do?${normal_text}\n\n"
+    printf "1) Install new extensions\n"
+    printf "2) Activate already installed extensions\n\n"
+    
+    while true; do
+        read -p "Enter your choice (1/2): " choice
+        case $choice in
+            1) ACTIVATION_MODE="install"; break ;;
+            2) ACTIVATION_MODE="activate"; break ;;
+            *) printf "${error_text}Invalid choice. Please enter 1 or 2.${normal_text}\n" ;;
+        esac
+    done
+fi
+
+# Wenn wir im Aktivierungsmodus sind, aktiviere alle Extensions und beende
+if [ "$ACTIVATION_MODE" = "activate" ]; then
+    print_banner
+    printf "\n${info_text_blue}Activating extensions...${normal_text}\n"
+    enable_all_extensions
+    printf "\n${normal_text}Complete!\n\n"
+    exit 0
+fi
+
+# Ansonsten normale Befehlszeilenparameter verarbeiten
 while test $# -gt 0; do
     case "$1" in
     -e | --enable)
@@ -293,6 +363,9 @@ while test $# -gt 0; do
     -f | --file)
         install_exts_from_links_file "$2"
         ;;
+    -a | --activate)
+        # Wurde bereits behandelt
+        ;;
     esac
     IsNumber "$1" && EXTENSIONS_TO_INSTALL+=($1)
     shift
@@ -300,13 +373,9 @@ done
 
 extensions_count="${#EXTENSIONS_TO_INSTALL[@]}"
 
-if [ "$args_count" -eq 0 ]; then
-    printf "\n${error_text}Invalid usage.\n${normal_text}"
-    print_usage
-
-elif [ "$extensions_count" -eq 0 ]; then
+if [ "$ACTIVATION_MODE" = "install" ] && [ "$extensions_count" -eq 0 ]; then
     printf "\n${error_text}Error: Could not find any valid extension IDs or URLs for installation.\n${normal_text}\n"
     exit 1
-else
+elif [ "$extensions_count" -gt 0 ]; then
     begin_install
 fi
