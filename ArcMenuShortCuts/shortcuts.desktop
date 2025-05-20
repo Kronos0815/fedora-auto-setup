@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=YouTube Search
+Exec=xdg-open "https://www.youtube.com/results?search_query=%s"
+Terminal=false
+Type=Application
+X-GNOME-Keywords=yt;youtube
+
+#~/.local/share/applications/
