@@ -9,9 +9,15 @@
 #       Author: Cyrus Frost                                     #
 #       License: MIT                                            #
 #                                                               #
-#     https://github.com/ToasterUwU/install-gnome-extensions       #
+#     https://github.com/ToasterUwU/install-gnome-extensions    #
 #                                                               #
 #################################################################
+
+##################################################################################
+# My Setup:                                                                      #
+# ./install-gnome-extensions.sh --enable 3628 3193 779 97 4158 3843 6580 19 1460 #
+# ./install-gnome-extensions.sh --activate                                       #
+##################################################################################          
 
 #vars
 script_revision="v1.3.0"
