@@ -31,20 +31,6 @@ normal_text=$(tput sgr0)
 error_text=$(tput setaf 1)
 status_text_yellow=$(tput setaf 3)
 
-# Bail immediately if running as root.
-# function CheckIfRunningAsRoot() {
-#     if [ "$(id -u)" = 0 ]; then
-#         printf "
-# ${error_text}There was a error message here, but using sudo works just fine.. so i will comment this part out
-
-# ${normal_text}"
-
-#         exit 1
-#     fi
-# }
-
-# CheckIfRunningAsRoot
-
 # Trap SIGINT and SIGTERM.
 function _term() {
     printf "\n\n${normal_text}"
@@ -169,6 +155,9 @@ function install_shell_extensions() {
         rm "$filename"
 
         if [ ! "$ENABLE_ALL" = "false" ]; then
+
+            restart_gnome_shell
+
             enable_extension "$ext_uuid"
         fi
 
@@ -260,6 +249,22 @@ function begin_install() {
     install_shell_extensions
     printf "\n${normal_text}Complete!\n\n"
     IsEnvGNOME || printf "${normal_text}Please login to GNOME desktop to see the installed/enabled extensions.\n\n"
+}
+
+function restart_gnome_shell() {
+    printf "${info_text_blue}\nRestarting GNOME Shell to activate extensions...\n${normal_text}"
+
+    if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+        busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s 'Meta.restart("Restarting GNOME Shell...")'
+        # Kurze Pause für Wayland-Neustart
+        sleep 2
+    else
+        killall -HUP gnome-shell
+        # Kurze Pause für X11-Neustart
+        sleep 1
+    fi
+
+    printf "${info_text_blue}Shell restart requested. Extensions should be active soon.\n${normal_text}"
 }
 
 # Obtain GNOME Shell version.
