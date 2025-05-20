@@ -10,3 +10,4 @@ sudo dnf install -y gtk-murrine-engine
 sudo dnf install -y sassc
 sudo dnf install -y gnome-themes-extra
 
+# curl the theme
