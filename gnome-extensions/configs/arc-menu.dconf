@@ -1,0 +1,26 @@
+[/]
+arcmenu-hotkey=['<Super>l']
+dash-to-panel-standalone=false
+hide-overview-on-startup=true
+menu-background-color='rgb(39,46,51)'
+menu-border-color='rgb(0,0,0)'
+menu-border-radius=16
+menu-border-width=0
+menu-button-appearance='None'
+menu-font-size=10
+menu-item-active-bg-color='rgb(38,162,105)'
+menu-item-hover-bg-color='rgb(38,162,105)'
+menu-layout='GnomeOverview'
+menu-position-alignment=50
+multi-monitor=false
+override-menu-theme=true
+position-in-panel='Center'
+prefs-visible-page=0
+recently-installed-apps=@as []
+runner-hotkey=['Super_L']
+runner-position='Centered'
+runner-search-display-style='List'
+runner-show-frequent-apps=false
+search-entry-border-radius=(true, 25)
+show-activities-button=true
+update-notifier-project-version=65
