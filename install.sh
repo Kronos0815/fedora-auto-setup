@@ -80,7 +80,9 @@ install_extension_manager() {
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     
     # Installiere den Extension Manager ohne Benutzerinteraktion
-    sudo flatpak install https://dl.flathub.org/repo/appstream/com.mattjakeman.ExtensionManager.flatpakref
+    # Use -y flag to automatically answer yes to prompts and use the correct application ID
+    flatpak install -y flathub com.mattjakeman.ExtensionManager
+    
     echo "GNOME Shell Extension Manager installed successfully!"
     read -p "Press Enter to continue..."
 }
