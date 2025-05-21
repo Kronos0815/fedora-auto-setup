@@ -14,14 +14,16 @@ sudo dnf install -y curl wget jq
 # ./install-gnome-extensions.sh --enable 3628 3193 779 97 4158 3843 6580 19 1460 #
 # ./install-gnome-extensions.sh --activate                                       #
 ##################################################################################   
+
+# make sure the script is executable
 chmod +x ./gnome-extensions/install-gnome-extensions.sh
 chmod +x ./gnome-extensions/deploy-configs.sh
-# Change this line:
+
+# run extension installer
 ./gnome-extensions/install-gnome-extensions.sh --enable 3628 3193 779 97 4158 3843 6580 19 1460
 
-
+# activate extensions
 #./gnome-extensions/install-gnome-extensions.sh --activate
 
-# Install Configs
-# run config installer
+# install extension configs
 #./gnome-extensions/deploy-configs.sh ./configs
