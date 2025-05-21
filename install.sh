@@ -15,7 +15,7 @@ show_menu() {
     echo "2. Install GNOME Extensions"
     echo "3. Activate GNOME Extensions"
     echo "4. Load Extension Configurations"
-    echo "5. (Not implemented yet)"
+    echo "5. Install GNOME Tweaks (Not implemented) and Extension Manager"
     echo "0. Exit"
     echo "====================================="
     echo -n "Please enter your choice [0-5]: "
@@ -63,6 +63,23 @@ load_configs() {
     read -p "Press Enter to continue..."
 }
 
+# Function to install GNOME Tweaks and Extension Manager (not implemented)
+install_tweaks() {
+    echo "Installing GNOME Tweaks and Extension Manager..."
+    sudo dnf install -y gnome-tweaks gnome-shell-extension-manager
+    echo "GNOME Tweaks and Extension Manager installed successfully!"
+    read -p "Press Enter to continue..."
+}
+
+install_extension_manager() {
+    echo "Installing GNOME Shell Extension Manager..."
+    sudo flatpak install -y flathub com.mattjakeman.ExtensionManager 
+    echo "GNOME Shell Extension Manager installed successfully!"
+    read -p "Press Enter to continue..."
+}
+
+
+
 # Main menu loop
 while true; do
     show_menu
@@ -83,8 +100,8 @@ while true; do
             ;;
         
         5)
-            echo "This option is not implemented yet."
-            read -p "Press Enter to continue..."
+            install_tweaks
+            install_extension_manager
             ;;
         0)
             echo "Exiting..."
