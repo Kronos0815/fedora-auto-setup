@@ -66,7 +66,7 @@ load_configs() {
 # Function to install GNOME Tweaks and Extension Manager (not implemented)
 install_tweaks() {
     echo "Installing GNOME Tweaks and Extension Manager..."
-    sudo dnf install -y gnome-tweaks gnome-shell-extension-manager
+    sudo dnf install -y gnome-tweaks
     echo "GNOME Tweaks and Extension Manager installed successfully!"
     read -p "Press Enter to continue..."
 }
