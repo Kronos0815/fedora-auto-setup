@@ -67,13 +67,13 @@ load_configs() {
 install_tweaks() {
     echo "Installing GNOME Tweaks and Extension Manager..."
     sudo dnf install -y gnome-tweaks
-    echo "GNOME Tweaks and Extension Manager installed successfully!"
+    echo "GNOME Tweaks installed successfully!"
     read -p "Press Enter to continue..."
 }
 
 install_extension_manager() {
     echo "Installing GNOME Shell Extension Manager..."
-    sudo flatpak install -y flathub com.mattjakeman.ExtensionManager 
+    sudo flatpak install flathub com.mattjakeman.ExtensionManager 
     echo "GNOME Shell Extension Manager installed successfully!"
     read -p "Press Enter to continue..."
 }
