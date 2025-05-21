@@ -84,11 +84,14 @@ install_extension_manager() {
     # Stelle sicher, dass das Flathub-Repository hinzugefügt wurde
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     
-    # Installiere den Extension Manager ohne Benutzerinteraktion
-    # Use -y flag to automatically answer yes to prompts and use the correct application ID
-    flatpak install -y --noninteractive flathub com.mattjakeman.ExtensionManager
+    # Installiere den Extension Manager und fange "Nothing to do" ab
+    echo "Installing Extension Manager..."
+    if flatpak install -y flathub com.mattjakeman.ExtensionManager 2>&1 | grep -q "Nothing to do"; then
+        echo "Extension Manager is already installed or cannot be installed at the moment."
+    else
+        echo "Extension Manager installed successfully!"
+    fi
     
-    echo "GNOME Shell Extension Manager installed successfully!"
     read -p "Press Enter to continue..."
 }
 
