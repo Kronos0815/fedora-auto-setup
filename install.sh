@@ -52,7 +52,8 @@ activate_extensions() {
 
     # Make sure the script is executable
     chmod +x ./gnome-extensions/install-gnome-extensions.sh
-    chmod +x ./gnome-extensions/deploy-configs.sh1
+    chmod +x ./gnome-extensions/deploy-configs.sh
+
     echo "Activating GNOME extensions..."
     ./gnome-extensions/install-gnome-extensions.sh --activate
     echo "Extensions activated successfully!"
