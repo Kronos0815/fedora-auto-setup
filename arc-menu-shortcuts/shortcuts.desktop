@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=YouTube Search
+Name=yt
 Exec=xdg-open "https://www.youtube.com/results?search_query=%s"
 Terminal=false
 Type=Application

@@ -9,6 +9,19 @@ fi
 sudo dnf install -y curl wget jq
 
 # run extension installer
-# This script will install the extensions listed in extensions-list.txt
-./scripts/install-gnome-extensions.sh --enable --file extensions-list.txt
+##################################################################################
+# My Setup:                                                                      #
+# ./install-gnome-extensions.sh --enable 3628 3193 779 97 4158 3843 6580 19 1460 #
+# ./install-gnome-extensions.sh --activate                                       #
+##################################################################################   
+chmod +x ./gnome-extensions/install-gnome-extensions.sh
+chmod +x ./gnome-extensions/deploy-configs.sh
+# Change this line:
+./gnome-extensions/install-gnome-extensions.sh --enable 3628 3193 779 97 4158 3843 6580 19 1460
 
+
+#./gnome-extensions/install-gnome-extensions.sh --activate
+
+# Install Configs
+# run config installer
+#./gnome-extensions/deploy-configs.sh ./configs

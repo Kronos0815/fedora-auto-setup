@@ -1,0 +1,4 @@
+# Erweiterungs-Name,dconf-Pfad,Config-Datei
+arc-menu,/org/gnome/shell/extensions/arc-menu/,arc-menu.dconf
+blur-my-shell,/org/gnome/shell/extensions/blur-my-shell/panel/,blur-my-shell.dconf
+
