@@ -81,7 +81,7 @@ install_extension_manager() {
     
     # Installiere den Extension Manager ohne Benutzerinteraktion
     # Use -y flag to automatically answer yes to prompts and use the correct application ID
-    flatpak install -y flathub com.mattjakeman.ExtensionManager
+    flatpak install flathub com.mattjakeman.ExtensionManager
     
     echo "GNOME Shell Extension Manager installed successfully!"
     read -p "Press Enter to continue..."
