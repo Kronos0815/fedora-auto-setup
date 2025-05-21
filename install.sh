@@ -4,6 +4,14 @@ if [ "$(id -u)" -eq 0 ]; then
     exit 1
 fi
 
+#update system
+sudo dnf update -y
+sudo dnf upgrade -y
+sudo dnf autoremove -y
+
+# Install Extension Manager
+# TODO
+
 # Install Extensions
 # install necessary packages : curl wget jq
 sudo dnf install -y curl wget jq
