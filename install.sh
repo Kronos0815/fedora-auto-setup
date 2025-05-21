@@ -15,7 +15,7 @@ show_menu() {
     echo "2. Install GNOME Extensions"
     echo "3. Activate GNOME Extensions"
     echo "4. Load Extension Configurations"
-    echo "5. Install GNOME Tweaks (Not implemented) and Extension Manager"
+    echo "5. Install GNOME Tweaks and Extension Manager"
     echo "0. Exit"
     echo "====================================="
     echo -n "Please enter your choice [0-5]: "
@@ -49,6 +49,10 @@ install_extensions() {
 
 # Function to activate extensions
 activate_extensions() {
+
+    # Make sure the script is executable
+    chmod +x ./gnome-extensions/install-gnome-extensions.sh
+    chmod +x ./gnome-extensions/deploy-configs.sh1
     echo "Activating GNOME extensions..."
     ./gnome-extensions/install-gnome-extensions.sh --activate
     echo "Extensions activated successfully!"
@@ -81,7 +85,7 @@ install_extension_manager() {
     
     # Installiere den Extension Manager ohne Benutzerinteraktion
     # Use -y flag to automatically answer yes to prompts and use the correct application ID
-    flatpak install flathub com.mattjakeman.ExtensionManager
+    flatpak install -y flathub com.mattjakeman.ExtensionManager
     
     echo "GNOME Shell Extension Manager installed successfully!"
     read -p "Press Enter to continue..."
