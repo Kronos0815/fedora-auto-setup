@@ -78,19 +78,13 @@ install_tweaks() {
 
 # funtioniert nicht
 install_extension_manager() {
+
+    chmod +x ./scripts/install_extension_manager.sh
     echo "Installing GNOME Shell Extension Manager..."
-    # Stelle sicher, dass Flatpak installiert ist
-    sudo dnf install -y flatpak
-    
-    # Stelle sicher, dass das Flathub-Repository hinzugefügt wurde
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    
-    # Installiere den Extension Manager ohne Benutzerinteraktion
-    # Use -y flag to automatically answer yes to prompts and use the correct application ID
-    flatpak install -y flathub com.mattjakeman.ExtensionManager
-    
+    ./scripts/install_extension_manager.sh
     echo "GNOME Shell Extension Manager installed successfully!"
     read -p "Press Enter to continue..."
+
 }
 
 # Main menu loop
