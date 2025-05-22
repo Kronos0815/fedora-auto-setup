@@ -62,6 +62,9 @@ activate_extensions() {
 
 # Function to load extension configurations
 load_configs() {
+
+    # Make sure the script is executable
+    chmod +x ./gnome-extensions/deploy-configs.sh
     echo "Loading extension configurations..."
     ./gnome-extensions/deploy-configs.sh ./gnome-extensions
     echo "Extension configurations loaded successfully!"
