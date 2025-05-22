@@ -21,7 +21,7 @@ show_menu() {
     echo "8. Install Theme"
     echo "0. Exit"
     echo "====================================="
-    echo -n "Please enter your choice [0-7]: "
+    echo -n "Please enter your choice [0-8]: "
 }
 
 # Function to update the system
