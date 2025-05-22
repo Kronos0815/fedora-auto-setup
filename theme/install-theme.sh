@@ -22,3 +22,5 @@ cd ../..
 # install theme
 chmod +x /theme/Everforest-GTK-Theme/themes/install.sh
 ./theme/Everforest-GTK-Theme/themes/install.sh
+echo "Everforest GTK Theme installed successfully!"
+read -p "Press Enter to continue..."
