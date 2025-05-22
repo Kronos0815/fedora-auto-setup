@@ -9,11 +9,16 @@ sudo dnf install -y gtk-murrine-engine
 sudo dnf install -y sassc
 sudo dnf install -y gnome-themes-extra
 
+# if the direcotory does not exist, clone the repository
+if [ ! -d "theme/Everforest-GTK-Theme" ]; then
+    git clone https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme.git
+
+
 # update git repository in theme/Everforest-GTK-Theme
 cd theme/Everforest-GTK-Theme
 git pull
-cd ..
+cd ../..
 
 # install theme
-chmod +x Everforest-GTK-Theme/themes/install.sh
-./Everforest-GTK-Theme/themes/install.sh
+chmod +x /theme/Everforest-GTK-Theme/themes/install.sh
+./theme/Everforest-GTK-Theme/themes/install.sh
