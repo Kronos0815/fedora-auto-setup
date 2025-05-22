@@ -1,6 +1,13 @@
 [/]
-icon-style=0
+fixed-widths=true
+hide-icons=false
+hide-zeros=false
+hot-sensors=['_processor_usage_', '_memory_usage_', '__temperature_avg__', '_battery_time_left_', '_battery_rate_']
 position-in-panel=0
 show-battery=true
-show-gpu=true
-update-time=10
+show-fan=true
+show-memory=true
+show-processor=true
+show-temperature=true
+show-voltage=true
+use-higher-precision=false
