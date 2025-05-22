@@ -26,5 +26,12 @@ fi
 echo "Making the install script executable and running it..."
 cd "$THEME_DIR/themes"
 chmod +x install.sh
-./install.sh
+./install.sh -l --tweaks macos
 echo "Theme installation completed."
+
+# Change Background
+echo "Changing background to Everforest..."
+WALLPAPER_DIR="$(dirname "$THEME_DIR")/wallpapers"
+mkdir -p "$WALLPAPER_DIR"
+cp "$THEME_DIR/wallpapers/everforest.png" "$WALLPAPER_DIR/"
+gsettings set org.gnome.desktop.background picture-uri "file://$WALLPAPER_DIR/everforest.png"
