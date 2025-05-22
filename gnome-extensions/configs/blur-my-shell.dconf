@@ -1,7 +1,7 @@
 [/]
 settings-version=2
 
-[/appfolder]
+[org/gnome/shell/extensions/blur-my-shell/appfolder]
 brightness=0.59999999999999998
 sigma=30
 
