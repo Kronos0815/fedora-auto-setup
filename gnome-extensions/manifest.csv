@@ -1,5 +1,4 @@
 # Erweiterungs-Name,dconf-Pfad,Config-Datei
-
 arc-menu,/org/gnome/shell/extensions/arcmenu/,configs/arc-menu.dconf
 blur-my-shell,/org/gnome/shell/extensions/blur-my-shell/,configs/blur-my-shell.dconf
 coverflowalttab,/org/gnome/shell/extensions/coverflowalttab/,configs/coverflowalttab.dconf
