@@ -9,18 +9,22 @@ sudo dnf install -y gtk-murrine-engine
 sudo dnf install -y sassc
 sudo dnf install -y gnome-themes-extra
 
-# if the direcotory does not exist, clone the repository
-if [ ! -d "theme/Everforest-GTK-Theme" ]; then
-    git clone https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme.git
+# if the directory does not exist, clone the repository : https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme.git
+THEME_DIR="$(dirname "$(readlink -f "$0")")/Everforest-GTK-Theme"
+if [ ! -d "$THEME_DIR" ]; then
+    echo "Cloning Everforest GTK Theme repository..."
+    git clone https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme.git "$THEME_DIR"
+    echo "Repository cloned successfully."
+else
+    echo "Everforest GTK Theme directory already exists. Checking for updates..."
+    cd "$THEME_DIR"
+    git pull
+    echo "Repository updated."
 fi
 
-# update git repository in theme/Everforest-GTK-Theme
-cd theme/Everforest-GTK-Theme
-git pull
-cd ../..
-
-# install theme
-chmod +x /theme/Everforest-GTK-Theme/themes/install.sh
-./theme/Everforest-GTK-Theme/themes/install.sh
-echo "Everforest GTK Theme installed successfully!"
-read -p "Press Enter to continue..."
+# Navigate to the themes directory and run install.sh
+echo "Making the install script executable and running it..."
+cd "$THEME_DIR/themes"
+chmod +x install.sh
+./install.sh
+echo "Theme installation completed."
