@@ -12,7 +12,7 @@ sudo dnf install -y gnome-themes-extra
 # if the direcotory does not exist, clone the repository
 if [ ! -d "theme/Everforest-GTK-Theme" ]; then
     git clone https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme.git
-
+fi
 
 # update git repository in theme/Everforest-GTK-Theme
 cd theme/Everforest-GTK-Theme
