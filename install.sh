@@ -6,29 +6,21 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 # Function to display the menu
-
-# Bessere Reihenfolge:
-# 1. Update System
-# 2. Gnome Tweaks und Extension Manager installieren
-# 3. Gnome Extensions installieren
-# 4. Gnome Extensions Configurationen laden
-# 5. Gnome Extensions aktivieren
-# 6. reboot
-# 0. Exit
-
 show_menu() {
     clear
     echo "====================================="
     echo "      Fedora Auto Setup Menu         "
     echo "====================================="
     echo "1. Update System"
-    echo "2. Install GNOME Extensions"
-    echo "3. Activate GNOME Extensions"
-    echo "4. Load Extension Configurations"
-    echo "5. Install GNOME Tweaks and Extension Manager"
+    echo "2. Install GNOME Tweaks"
+    echo "3. Install GNOME Shell Extension Manager"
+    echo "4. Install GNOME Extensions"
+    echo "5. Load Extension Configurations"
+    echo "6. Activate GNOME Extensions"
+    echo "7. Reboot System"
     echo "0. Exit"
     echo "====================================="
-    echo -n "Please enter your choice [0-5]: "
+    echo -n "Please enter your choice [0-7]: "
 }
 
 # Function to update the system
@@ -39,6 +31,25 @@ update_system() {
     sudo dnf autoremove -y
     echo "System updated successfully!"
     read -p "Press Enter to continue..."
+}
+
+# Function to install GNOME Tweaks
+install_tweaks() {
+    echo "Installing GNOME Tweaks..."
+    sudo dnf install -y gnome-tweaks
+    echo "GNOME Tweaks installed successfully!"
+    read -p "Press Enter to continue..."
+}
+
+# Function to install GNOME Shell Extension Manager
+install_extension_manager() {
+
+    chmod +x ./scripts/install_extension_manager.sh
+    echo "Installing GNOME Shell Extension Manager..."
+    ./scripts/install_extension_manager.sh
+    echo "GNOME Shell Extension Manager installed successfully!"
+    read -p "Press Enter to continue..."
+
 }
 
 # Function to install extensions
@@ -57,22 +68,8 @@ install_extensions() {
     read -p "Press Enter to continue..."
 }
 
-# Function to activate extensions
-activate_extensions() {
-
-    # Make sure the script is executable
-    chmod +x ./gnome-extensions/install-gnome-extensions.sh
-    chmod +x ./gnome-extensions/deploy-configs.sh
-
-    echo "Activating GNOME extensions..."
-    ./gnome-extensions/install-gnome-extensions.sh --activate
-    echo "Extensions activated successfully!"
-    read -p "Press Enter to continue..."
-}
-
 # Function to load extension configurations
 load_configs() {
-
     # Make sure the script is executable
     chmod +x ./gnome-extensions/deploy-configs.sh
     echo "Loading extension configurations..."
@@ -81,23 +78,26 @@ load_configs() {
     read -p "Press Enter to continue..."
 }
 
-# Function to install GNOME Tweaks and Extension Manager (not implemented)
-install_tweaks() {
-    echo "Installing GNOME Tweaks and Extension Manager..."
-    sudo dnf install -y gnome-tweaks
-    echo "GNOME Tweaks installed successfully!"
+# Function to activate extensions
+activate_extensions() {
+    # Make sure the script is executable
+    chmod +x ./gnome-extensions/install-gnome-extensions.sh
+    echo "Activating GNOME extensions..."
+    ./gnome-extensions/install-gnome-extensions.sh --activate
+    echo "Extensions activated successfully!"
     read -p "Press Enter to continue..."
 }
 
-# funtioniert nicht
-install_extension_manager() {
-
-    chmod +x ./scripts/install_extension_manager.sh
-    echo "Installing GNOME Shell Extension Manager..."
-    ./scripts/install_extension_manager.sh
-    echo "GNOME Shell Extension Manager installed successfully!"
-    read -p "Press Enter to continue..."
-
+# Function to reboot the system
+reboot_system() {
+    echo "Rebooting system..."
+    read -p "Are you sure you want to reboot? (y/n): " confirm
+    if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
+        sudo reboot
+    else
+        echo "Reboot cancelled."
+        read -p "Press Enter to continue..."
+    fi
 }
 
 # Main menu loop
@@ -110,18 +110,22 @@ while true; do
             update_system
             ;;
         2)
-            install_extensions
+            install_tweaks
             ;;
         3)
-            activate_extensions
+            install_extension_manager
             ;;
         4)
+            install_extensions
+            ;;
+        5)
             load_configs
             ;;
-        
-        5)
-            install_tweaks
-            install_extension_manager
+        6)
+            activate_extensions
+            ;;
+        7)
+            reboot_system
             ;;
         0)
             echo "Exiting..."

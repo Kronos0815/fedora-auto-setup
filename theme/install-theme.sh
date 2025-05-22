@@ -10,4 +10,10 @@ sudo dnf install -y gtk-murrine-engine
 sudo dnf install -y sassc
 sudo dnf install -y gnome-themes-extra
 
-# curl the theme
+# update git repository in theme/Everforest-GTK-Theme
+cd theme/Everforest-GTK-Theme
+git pull
+cd ../..
+# install theme
+chmod +x /theme/Everforest-GTK-Theme/themes/install.sh
+run /theme/Everforest-GTK-Theme/themes/install.sh
