@@ -6,6 +6,16 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 # Function to display the menu
+
+# Bessere Reihenfolge:
+# 1. Update System
+# 2. Gnome Tweaks und Extension Manager installieren
+# 3. Gnome Extensions installieren
+# 4. Gnome Extensions Configurationen laden
+# 5. Gnome Extensions aktivieren
+# 6. reboot
+# 0. Exit
+
 show_menu() {
     clear
     echo "====================================="
