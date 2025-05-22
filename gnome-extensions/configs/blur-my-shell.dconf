@@ -23,7 +23,7 @@ pipeline='pipeline_default'
 pipeline='pipeline_default'
 
 [org/gnome/shell/extensions/blur-my-shell/panel]
-blur=true
+blur=false
 brightness=0.59999999999999998
 pipeline='pipeline_default'
 sigma=30
