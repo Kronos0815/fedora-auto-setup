@@ -31,7 +31,7 @@ echo "Theme installation completed."
 
 # Change Background
 echo "Changing background to Everforest..."
-WALLPAPER_DIR="$(dirname "$THEME_DIR")/wallpapers"
+WALLPAPER_DIR="$(dirname "$(dirname "$THEME_DIR")")/theme/wallpaper"
 mkdir -p "$WALLPAPER_DIR"
 cp "$THEME_DIR/wallpapers/everforest.png" "$WALLPAPER_DIR/"
 gsettings set org.gnome.desktop.background picture-uri "file://$WALLPAPER_DIR/everforest.png"
