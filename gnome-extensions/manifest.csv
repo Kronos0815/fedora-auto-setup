@@ -1,11 +1,11 @@
 # Erweiterungs-Name,dconf-Pfad,Config-Datei
-arc-menu,/org/gnome/shell/extensions/arcmenu/,arc-menu.dconf
-blur-my-shell,/org/gnome/shell/extensions/blur-my-shell/,blur-my-shell.dconf
-burn-my-windows,/org/gnome/shell/extensions/burn-my-windows/,burn-my-windows.dconf
-coverflowalttab,/org/gnome/shell/extensions/coverflowalttab/,coverflowalttab.dconf
-dash-to-dock,/org/gnome/shell/extensions/dash-to-dock/,dash-to-dock.dconf
-gnome-ui-tune,/org/gnome/shell/extensions/gnome-ui-tune/,gnome-ui-tune.dconf
-just-perfection,/org/gnome/shell/extensions/just-perfection/,just-perfection.dconf
-openbar,/org/gnome/shell/extensions/openbar/,openbar.dconf
-user-theme,/org/gnome/shell/extensions/user-theme/,user-theme.dconf
-vitals,/org/gnome/shell/extensions/vitals/,vitals.dconf
+arc-menu,/org/gnome/shell/extensions/arcmenu/,configs/arc-menu.dconf
+blur-my-shell,/org/gnome/shell/extensions/blur-my-shell/,configs/blur-my-shell.dconf
+burn-my-windows,/org/gnome/shell/extensions/burn-my-windows/,configs/burn-my-windows.dconf
+coverflowalttab,/org/gnome/shell/extensions/coverflowalttab/,configs/coverflowalttab.dconf
+dash-to-dock,/org/gnome/shell/extensions/dash-to-dock/,configs/dash-to-dock.dconf
+gnome-ui-tune,/org/gnome/shell/extensions/gnome-ui-tune/,configs/gnome-ui-tune.dconf
+just-perfection,/org/gnome/shell/extensions/just-perfection/,configs/just-perfection.dconf
+openbar,/org/gnome/shell/extensions/openbar/,configs/openbar.dconf
+user-theme,/org/gnome/shell/extensions/user-theme/,configs/user-theme.dconf
+vitals,/org/gnome/shell/extensions/vitals/,configs/vitals.dconf
