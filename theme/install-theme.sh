@@ -5,7 +5,6 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 # install necessary packages
-
 sudo dnf install -y gtk-murrine-engine
 sudo dnf install -y sassc
 sudo dnf install -y gnome-themes-extra

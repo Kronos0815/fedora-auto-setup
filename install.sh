@@ -18,6 +18,7 @@ show_menu() {
     echo "5. Load Extension Configurations"
     echo "6. Activate GNOME Extensions"
     echo "7. Reboot System"
+    echo "8. Install Theme"
     echo "0. Exit"
     echo "====================================="
     echo -n "Please enter your choice [0-7]: "
@@ -88,6 +89,18 @@ activate_extensions() {
     read -p "Press Enter to continue..."
 }
 
+# Funtion to install the Theme
+install_theme() {
+    echo "Installing the theme..."
+    # Make sure the script is executable
+    chmod +x ./theme/install-theme.sh
+    # Run the theme installer
+    ./theme/install-theme.sh
+    echo "Theme installed successfully!"
+    read -p "Press Enter to continue..."
+}
+
+
 # Function to reboot the system
 reboot_system() {
     echo "Rebooting system..."
@@ -127,6 +140,11 @@ while true; do
         7)
             reboot_system
             ;;
+
+        8)
+            install_theme
+            ;;
+
         0)
             echo "Exiting..."
             exit 0
