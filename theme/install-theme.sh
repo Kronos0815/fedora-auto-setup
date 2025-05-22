@@ -15,4 +15,4 @@ git pull
 cd ../..
 # install theme
 chmod +x /theme/Everforest-GTK-Theme/themes/install.sh
-run /theme/Everforest-GTK-Theme/themes/install.sh
+./theme/Everforest-GTK-Theme/themes/install.sh
