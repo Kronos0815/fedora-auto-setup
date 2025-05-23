@@ -29,6 +29,7 @@ chmod +x install.sh
 ./install.sh -l --tweaks macos
 echo "Theme installation completed."
 
+
 # Change Background
 echo "Changing background to Everforest..."
 
