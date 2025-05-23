@@ -9,6 +9,9 @@
     - obsidian
     - thunderbird
     - brave -> default browser
+    - anki
+    - appimagelauncher?
+    - onlyoffice?
 
 The script uses the extension install script from https://github.com/ToasterUwU/install-gnome-extensions
 
