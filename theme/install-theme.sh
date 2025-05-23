@@ -55,6 +55,7 @@ install_everforest_theme() {
 # Function to set up the wallpaper
 set_wallpaper() {
 
+    cd ../..
     # Change Background
     echo "Changing background to Everforest..."
 
