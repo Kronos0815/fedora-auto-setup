@@ -128,7 +128,7 @@ case $choice in
         ;;
     2)
         echo "Setting up Wallpaper..."
-        setup_wallpaper
+        set_wallpaper
         ;;
     3)
         echo "Installing Icons..."
