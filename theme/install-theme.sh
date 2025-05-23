@@ -31,10 +31,18 @@ echo "Theme installation completed."
 
 # Change Background
 echo "Changing background to Everforest..."
-WALLPAPER_PATH="$(dirname "$(readlink -f "$0")")/wallpaper/everforest.png"
-cd "$(dirname "$(readlink -f "$0")")"
-gsettings set org.gnome.desktop.background picture-uri "file://$WALLPAPER_PATH"
-gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER_PATH"
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+WALLPAPER_PATH="${SCRIPT_DIR}/wallpaper/everforest.png"
+
+# Überprüfen, ob die Datei existiert
+if [ ! -f "$WALLPAPER_PATH" ]; then
+    echo "Fehler: Wallpaper nicht gefunden unter: $WALLPAPER_PATH"
+    exit 1
+fi
+
+echo "Verwende Wallpaper: $WALLPAPER_PATH"
+gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_PATH}"
+gsettings set org.gnome.desktop.background picture-uri-dark "file://${WALLPAPER_PATH}"
 gsettings set org.gnome.desktop.background picture-options 'zoom'
 gsettings set org.gnome.desktop.background color-shading-type 'solid'
 
