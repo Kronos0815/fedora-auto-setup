@@ -19,6 +19,7 @@ show_menu() {
     echo "6. Activate GNOME Extensions"
     echo "7. Reboot System"
     echo "8. Install Theme"
+    echo "9. Install ZSH with Oh My Zsh"
     echo "0. Exit"
     echo "====================================="
     echo -n "Please enter your choice [0-8]: "
@@ -113,6 +114,11 @@ reboot_system() {
     fi
 }
 
+# Function to install ZSH with Oh My Zsh
+install_zsh() {
+    chmod +x ./scripts/setup-terminal.sh
+    ./scripts/setup-terminal.sh
+
 # Main menu loop
 while true; do
     show_menu
@@ -143,6 +149,10 @@ while true; do
 
         8)
             install_theme
+            ;;
+
+        9)
+            install_zsh
             ;;
 
         0)
