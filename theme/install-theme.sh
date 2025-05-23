@@ -31,18 +31,33 @@ echo "Theme installation completed."
 
 # Change Background
 echo "Changing background to Everforest..."
-SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-WALLPAPER_PATH="${SCRIPT_DIR}/wallpaper/everforest.png"
 
-# Überprüfen, ob die Datei existiert
-if [ ! -f "$WALLPAPER_PATH" ]; then
-    echo "Fehler: Wallpaper nicht gefunden unter: $WALLPAPER_PATH"
+# Set up paths
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+WALLPAPER_SOURCE_PATH="${SCRIPT_DIR}/wallpaper/everforest.png"
+WALLPAPER_TARGET_DIR="${HOME}/.wallpaper"
+WALLPAPER_TARGET_PATH="${WALLPAPER_TARGET_DIR}/everforest.png"
+
+# Überprüfen, ob die Quelldatei existiert
+if [ ! -f "$WALLPAPER_SOURCE_PATH" ]; then
+    echo "Fehler: Wallpaper nicht gefunden unter: $WALLPAPER_SOURCE_PATH"
     exit 1
 fi
 
-echo "Verwende Wallpaper: $WALLPAPER_PATH"
-gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_PATH}"
-gsettings set org.gnome.desktop.background picture-uri-dark "file://${WALLPAPER_PATH}"
+# Erstelle das Zielverzeichnis, falls es nicht existiert
+if [ ! -d "$WALLPAPER_TARGET_DIR" ]; then
+    echo "Erstelle Zielverzeichnis: $WALLPAPER_TARGET_DIR"
+    mkdir -p "$WALLPAPER_TARGET_DIR"
+fi
+
+# Kopiere das Wallpaper in das Zielverzeichnis
+echo "Kopiere Wallpaper nach: $WALLPAPER_TARGET_PATH"
+cp "$WALLPAPER_SOURCE_PATH" "$WALLPAPER_TARGET_PATH"
+
+# Setze das Wallpaper
+echo "Verwende Wallpaper: $WALLPAPER_TARGET_PATH"
+gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_TARGET_PATH}"
+gsettings set org.gnome.desktop.background picture-uri-dark "file://${WALLPAPER_TARGET_PATH}"
 gsettings set org.gnome.desktop.background picture-options 'zoom'
 gsettings set org.gnome.desktop.background color-shading-type 'solid'
 
