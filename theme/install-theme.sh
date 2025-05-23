@@ -140,7 +140,7 @@ case $choice in
     5)
         echo "Installing All..."
         install_everforest_theme
-        setup_wallpaper
+        set_wallpaper
         ;;
     0)
         echo "Exiting..."
