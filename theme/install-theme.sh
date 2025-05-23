@@ -35,4 +35,7 @@ WALLPAPER_PATH="$(dirname "$(readlink -f "$0")")/wallpaper/everforest.png"
 cd "$(dirname "$(readlink -f "$0")")"
 gsettings set org.gnome.desktop.background picture-uri "file://$WALLPAPER_PATH"
 gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER_PATH"
+gsettings set org.gnome.desktop.background picture-options 'zoom'
+gsettings set org.gnome.desktop.background color-shading-type 'solid'
+
 echo "Background changed successfully."
