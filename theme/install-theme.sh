@@ -29,12 +29,11 @@ chmod +x install.sh
 ./install.sh -l --tweaks macos
 echo "Theme installation completed."
 
-
 # Change Background
 echo "Changing background to Everforest..."
 
 # Set up paths
-SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 WALLPAPER_SOURCE_PATH="${SCRIPT_DIR}/wallpaper/everforest.jpg"
 WALLPAPER_TARGET_DIR="${HOME}/.wallpaper"
 WALLPAPER_TARGET_PATH="${WALLPAPER_TARGET_DIR}/everforest.jpg"
