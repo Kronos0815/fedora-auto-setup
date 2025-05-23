@@ -50,21 +50,30 @@ install_everforest_theme() {
     chmod +x install.sh
     ./install.sh -l --tweaks macos
     echo "Theme installation completed."
+    cd ../..
 }
 
 # Function to set up the wallpaper
 set_wallpaper() {
-    ls
-    cd ../..
-    ls
+
     # Change Background
     echo "Changing background to Everforest..."
 
     # Set up paths
+    ls
+
     SCRIPT_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
     WALLPAPER_SOURCE_PATH="${SCRIPT_DIR}/wallpaper/everforest.jpg"
     WALLPAPER_TARGET_DIR="${HOME}/.wallpaper"
     WALLPAPER_TARGET_PATH="${WALLPAPER_TARGET_DIR}/everforest.jpg"
+
+    # Debug-Ausgaben
+    echo "DEBUG: SCRIPT_DIR: $SCRIPT_DIR"
+    echo "DEBUG: WALLPAPER_SOURCE_PATH: $WALLPAPER_SOURCE_PATH"
+    echo "DEBUG: WALLPAPER_TARGET_DIR: $WALLPAPER_TARGET_DIR"
+    echo "DEBUG: WALLPAPER_TARGET_PATH: $WALLPAPER_TARGET_PATH"
+
+
 
     # Überprüfen, ob die Quelldatei existiert
     if [ ! -f "$WALLPAPER_SOURCE_PATH" ]; then
@@ -99,6 +108,8 @@ set_wallpaper() {
     fi
 
     # Setze das Wallpaper
+    echo "DEBUG: Setze Wallpaper mit gsettings: $WALLPAPER_TARGET_PATH"
+
     gsettings set org.gnome.desktop.background picture-uri "file://${WALLPAPER_TARGET_PATH}"
     gsettings set org.gnome.desktop.background picture-uri-dark "file://${WALLPAPER_TARGET_PATH}"
     gsettings set org.gnome.desktop.background picture-options 'zoom'
