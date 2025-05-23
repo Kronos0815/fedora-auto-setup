@@ -43,7 +43,7 @@ echo "DEBUG: SCRIPT_DIR: $SCRIPT_DIR"
 echo "DEBUG: WALLPAPER_SOURCE_PATH: $WALLPAPER_SOURCE_PATH"
 echo "DEBUG: WALLPAPER_TARGET_DIR: $WALLPAPER_TARGET_DIR"
 echo "DEBUG: WALLPAPER_TARGET_PATH: $WALLPAPER_TARGET_PATH"
-
+ls
 # Überprüfen, ob die Quelldatei existiert
 if [ ! -f "$WALLPAPER_SOURCE_PATH" ]; then
     echo "Fehler: Wallpaper nicht gefunden unter: $WALLPAPER_SOURCE_PATH"
