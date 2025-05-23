@@ -118,7 +118,7 @@ reboot_system() {
 install_zsh() {
     chmod +x ./scripts/setup-terminal.sh
     ./scripts/setup-terminal.sh
-
+}
 # Main menu loop
 while true; do
     show_menu
