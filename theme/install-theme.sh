@@ -34,9 +34,9 @@ echo "Changing background to Everforest..."
 
 # Set up paths
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-WALLPAPER_SOURCE_PATH="${SCRIPT_DIR}/wallpaper/everforest.png"
+WALLPAPER_SOURCE_PATH="${SCRIPT_DIR}/wallpaper/everforest.jpg"  # Korrigiert: .jpg statt .png
 WALLPAPER_TARGET_DIR="${HOME}/.wallpaper"
-WALLPAPER_TARGET_PATH="${WALLPAPER_TARGET_DIR}/everforest.png"
+WALLPAPER_TARGET_PATH="${WALLPAPER_TARGET_DIR}/everforest.jpg"  # Korrigiert: .jpg statt .png
 
 # Überprüfen, ob die Quelldatei existiert
 if [ ! -f "$WALLPAPER_SOURCE_PATH" ]; then
