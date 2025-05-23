@@ -146,15 +146,12 @@ while true; do
         7)
             reboot_system
             ;;
-
         8)
             install_theme
             ;;
-
         9)
             install_zsh
             ;;
-
         0)
             echo "Exiting..."
             exit 0
