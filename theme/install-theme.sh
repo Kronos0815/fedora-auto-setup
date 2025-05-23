@@ -26,38 +26,7 @@ echo "====================================="
 echo -n "Please enter your choice [0-5]: "
 read choice
 
-# Check the user's choice
-case $choice in
-    1)
-        echo "Installing Theme..."
-        install_everforest_theme
-        ;;
-    2)
-        echo "Setting up Wallpaper..."
-        setup_wallpaper
-        ;;
-    3)
-        echo "Installing Icons..."
-        echo "Icons installation is not implemented yet."
-        ;;
-    4)
-        echo "Installing Fonts..."
-        echo "Fonts installation is not implemented yet."
-        ;;
-    5)
-        echo "Installing All..."
-        install_everforest_theme
-        setup_wallpaper
-        ;;
-    0)
-        echo "Exiting..."
-        exit 0
-        ;;
-    *)
-        echo "Invalid choice. Exiting..."
-        exit 1
-        ;;
-esac
+
 
 # Function to install the Everforest GTK Theme
 install_everforest_theme() {
@@ -148,3 +117,37 @@ set_wallpaper() {
 
 # Function to install fonts
 # TODO
+
+
+# Check the user's choice
+case $choice in
+    1)
+        echo "Installing Theme..."
+        install_everforest_theme
+        ;;
+    2)
+        echo "Setting up Wallpaper..."
+        setup_wallpaper
+        ;;
+    3)
+        echo "Installing Icons..."
+        echo "Icons installation is not implemented yet."
+        ;;
+    4)
+        echo "Installing Fonts..."
+        echo "Fonts installation is not implemented yet."
+        ;;
+    5)
+        echo "Installing All..."
+        install_everforest_theme
+        setup_wallpaper
+        ;;
+    0)
+        echo "Exiting..."
+        exit 0
+        ;;
+    *)
+        echo "Invalid choice. Exiting..."
+        exit 1
+        ;;
+esac
